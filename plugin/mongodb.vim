@@ -42,7 +42,7 @@ function! s:DB(...) abort
 
   " Execute the contents of the mongo shell input file.
   silent 1,$delete
-  silent execute 'read ! mongo ' . l:db 
+  silent execute 'read ! mongo "' . l:db . '"'
         \ . ' --quiet --norc --shell ' . s:mongoConfigFile . ' < ' . s:mongoInputFile
         \ . ' | grep -vE "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}[+-][0-9]{4}\s+"'
 
