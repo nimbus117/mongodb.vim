@@ -5,6 +5,7 @@ let g:mongoPluginLoaded = 1
 
 let s:vimInputFile = './.vim.mongo.js'
 let s:vimOutputFile = './vim.mongo-out.json'
+
 let s:scriptFolder = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:mongoInputFile = s:scriptFolder . '/vim.mongo-in.js'
 let s:mongoConfigFile = s:scriptFolder . '/config.js'
@@ -40,6 +41,8 @@ function! s:DB(...) abort
     execute l:outputWindowNumber . 'wincmd w'
   endif
 
+  setlocal modifiable
+
   " Execute the contents of the mongo shell input file.
   silent 1,$delete
   silent execute 'read ! mongo "' . l:db . '"'
@@ -49,6 +52,8 @@ function! s:DB(...) abort
   " Move to the top of the file and delete the blank line.
   normal gg
   .delete
+
+  setlocal nomodifiable
 
   " Delete the mongo shell input file and return to the original window.
   silent call delete(s:mongoInputFile)
