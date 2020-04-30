@@ -10,15 +10,3 @@ takes a range.
 `:Mongo` opens a buffer named './vim.mongo.js' and maps `<c-j>` to execute the
 current line `.DB` in normal mode and the highlighted range in visual mode
 `'<,'>:DB`.
-
-
-
-
-Add
-===
-
-autocomplete of table names
-
-autocomplete methods od tables
-
-autocomplete methods on cursor
