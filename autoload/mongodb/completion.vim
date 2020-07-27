@@ -8,8 +8,13 @@ function! mongodb#completion#omnifunc(findstart, base) abort
 		return -2
 	else
 		let len = strlen(a:base)
-		return map(filter(copy(s:collectionMethods), {k, v -> strpart(v.word, 0, len) ==# a:base}),
-					\ {k, v -> extend(v, {'kind': 'm'})})
+		return map(
+          \  filter(
+          \    copy(s:collectionMethods),
+          \    {k, v -> strpart(v.word, 0, len) ==# a:base}
+          \  ),
+					\  {k, v -> extend(v, {'kind': 'm', 'info': ' '}, "keep")}
+          \)
 	endif
 endfunction
 
