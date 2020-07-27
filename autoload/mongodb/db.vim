@@ -14,7 +14,7 @@ function! mongodb#db#command(startLine, endLine) abort
     return
   endif
 
-  " Write the given range to the mongo shell tempory input file
+  " Write the given range to the mongo shell temporary input file
   silent execute a:startLine . ',' . a:endLine . 'write! ' . s:mongoTempInputFile
 
   " Open or move to the output window, delete the contents and return to the
