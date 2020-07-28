@@ -11,7 +11,7 @@
 // <c-j> or :DB
 help
 
-// vip<c-j> or :11,15DB
+// vip<c-j> or :15,19DB
 db.example.insertOne({
   name: "Person 1",
   age: 1,
