@@ -1,7 +1,7 @@
 function! mongodb#completion#omnifunc(findstart, base) abort
 	if a:findstart
 		let l:line = getline('.')
-		if (match(l:line, 'db\.\w\+\.\w*$') >= 0)
+		if (match(l:line, 'db\.\w\+\.') >= 0)
 			let l:col = match(l:line[:col('.')], '\%(\a\w*\)\?$')
 			return l:col != -1 ? col: -2
 		endif
