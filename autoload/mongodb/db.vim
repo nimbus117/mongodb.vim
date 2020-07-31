@@ -35,6 +35,7 @@ function! mongodb#db#command(startLine, endLine) abort
   execute l:currentWindowNumber . 'wincmd w'
 
   echo "Running..."
+  let s:start_time = reltime()
 
   " execute mongo shell as an async job
   let l:mongoCommand = [
@@ -44,7 +45,7 @@ function! mongodb#db#command(startLine, endLine) abort
         \ ]
 
 	function! CloseCallback(channel)
-      echo "Complete"
+      echo "Elapsed time:" split(reltimestr(reltime(s:start_time)))[0] . 's'
       silent call delete(s:mongoTempInputFile)
 	endfunc
 
