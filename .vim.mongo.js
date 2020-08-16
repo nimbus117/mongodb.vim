@@ -11,7 +11,9 @@
 // <c-j> or :DB
 help
 
-// vip<c-j> or :15,19DB
+db.getCollectionNames()
+
+// vip<c-j> or :17,21DB
 db.example.insertOne({
   name: "Person 1",
   age: 1,
@@ -31,12 +33,8 @@ for (let x = 2; x <= 100; x++) {
 db.example.insertMany(arr)
 
 db.example.find(
-  {
-    age: { $lte: 35 }
-  },
-  {
-    name: 1, age: 1, _id: 0 
-  }
-).map((t) => [t.name, t.age])
+  { age: { $lte: 35 } },
+  { name: 1, age: 1, _id: 0 }
+).map((person) => [person.name, person.age])
 
 db.example.drop()

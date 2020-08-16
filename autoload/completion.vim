@@ -1,9 +1,9 @@
-function! mongodb#completion#omnifunc(findstart, base) abort
+function! mongodb#completion#collectionMethods(findstart, base) abort
 	if a:findstart
 		let l:line = getline('.')
 		if (match(l:line, 'db\.\w\+\.') >= 0)
 			let l:col = match(l:line[:col('.')], '\%(\a\w*\)\?$')
-			return l:col != -1 ? col: -2
+			return l:col != -1 ? l:col : -2
 		endif
 		return -2
 	else
@@ -13,7 +13,7 @@ function! mongodb#completion#omnifunc(findstart, base) abort
           \    copy(s:collectionMethods),
           \    {k, v -> strpart(v.word, 0, len) ==# a:base}
           \  ),
-					\  {k, v -> extend(v, {'kind': 'm', 'info': ' '}, "keep")}
+					\  {k, v -> extend(v, {'kind': 'f', 'info': ' '}, "keep")}
           \)
 	endif
 endfunction

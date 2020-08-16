@@ -3,7 +3,7 @@ let s:scriptFolder = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:mongoConfigFile = s:scriptFolder . '/js/mongo-config.js'
 let s:mongoTempInputFile = s:scriptFolder . '/js/mongo-temp-in.js'
 
-function! mongodb#db#command(startLine, endLine) abort
+function! db#runQuery(startLine, endLine) abort
   " Check the database connection string is set
   if exists('b:db')
     let l:db = b:db
@@ -30,7 +30,7 @@ function! mongodb#db#command(startLine, endLine) abort
     execute l:outputWindowNumber . 'wincmd w'
   endif
   setlocal modifiable
-  silent 1,$delete
+  silent 1,$delete _
   setlocal nomodifiable
   execute l:currentWindowNumber . 'wincmd w'
 

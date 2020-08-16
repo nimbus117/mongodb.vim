@@ -3,6 +3,6 @@ if exists('g:mongoPluginLoaded') || !executable('mongo') || has('win32')
 endif
 let g:mongoPluginLoaded = 1
 
-command! -range DB call mongodb#db#command(<line1>, <line2>)
+command! -range DB call db#runQuery(<line1>, <line2>)
 
-command! Mongo call mongodb#mongo#command()
+command! Mongo call mongo#openTab()
