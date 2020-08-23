@@ -1,4 +1,4 @@
-function! mongodb#completion#collectionMethods(findstart, base) abort
+function! completion#collectionMethods(findstart, base) abort
 	if a:findstart
 		let l:line = getline('.')
 		if (match(l:line, 'db\.\w\+\.') >= 0)
