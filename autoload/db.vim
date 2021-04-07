@@ -3,7 +3,14 @@ let s:scriptFolder = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:mongoConfigFile = s:scriptFolder . '/js/mongo-config.js'
 let s:mongoTempInputFile = s:scriptFolder . '/js/mongo-temp-in.js'
 
+let g:mongoPluginQueryRunning = 0
+
 function! db#runQuery(startLine, endLine) abort
+  if g:mongoPluginQueryRunning > 0
+    echo "Query already running"
+    return
+  endif
+
   " Check the database connection string is set
   if exists('b:db')
     let l:db = b:db
@@ -35,6 +42,7 @@ function! db#runQuery(startLine, endLine) abort
   execute l:currentWindowNumber . 'wincmd w'
 
   echo "Running..."
+  let g:mongoPluginQueryRunning = 1
   let s:start_time = reltime()
 
   " execute mongo shell as an async job
@@ -46,6 +54,7 @@ function! db#runQuery(startLine, endLine) abort
 
   function! CloseCallback(channel)
       echo "Elapsed time:" split(reltimestr(reltime(s:start_time)))[0] . 's'
+      let g:mongoPluginQueryRunning = 0
       silent call delete(s:mongoTempInputFile)
   endfunc
 
