@@ -44,10 +44,10 @@ function! db#runQuery(startLine, endLine) abort
         \   ' | grep -vE "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}[+-][0-9]{4}\s+"'
         \ ]
 
-	function! CloseCallback(channel)
+  function! CloseCallback(channel)
       echo "Elapsed time:" split(reltimestr(reltime(s:start_time)))[0] . 's'
       silent call delete(s:mongoTempInputFile)
-	endfunc
+  endfunc
 
   call job_start(l:mongoCommand, {
         \ 'in_io': 'file', 
