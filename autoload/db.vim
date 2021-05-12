@@ -33,9 +33,14 @@ function! db#runQuery(startLine, endLine) abort
     setlocal ft=json
     setlocal buftype=nofile
     setlocal noswapfile
+    " if ALE is installed disable for this buffer
+    if exists(":ALEDisableBuffer")
+      ALEDisableBuffer
+    endif
   else
     execute l:outputWindowNumber . 'wincmd w'
   endif
+
   setlocal modifiable
   silent 1,$delete _
   setlocal nomodifiable
