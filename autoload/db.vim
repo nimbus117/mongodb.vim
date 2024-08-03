@@ -1,7 +1,6 @@
 let s:vimOutputBuffer = './mongo-out.json'
 let s:scriptFolder = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let s:mongoConfigFile = s:scriptFolder . '/js/mongo-config.js'
-let s:mongoTempInputFile = s:scriptFolder . '/js/mongo-temp-in.js'
+let s:mongoTempInputFile = s:scriptFolder . '/mongo-temp-in.js'
 
 let g:mongoPluginQueryRunning = 0
 
@@ -53,8 +52,9 @@ function! db#runQuery(startLine, endLine) abort
   " execute mongo shell as an async job
   let l:mongoCommand = [
         \ "/bin/sh", "-c",
-        \ "mongo " . l:db . " --quiet --norc --shell " . s:mongoConfigFile . 
-        \   ' | grep -vE "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}[+-][0-9]{4}\s+"'
+        \ "mongosh " . l:db . " --quiet --norc --shell " . 
+        \   ' | grep -vE "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}[+-][0-9]{4}\s+"' . 
+        \   ' | head -n -1'
         \ ]
 
   function! CloseCallback(channel)

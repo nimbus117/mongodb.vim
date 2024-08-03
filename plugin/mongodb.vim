@@ -1,4 +1,4 @@
-if exists('g:mongoPluginLoaded') || !executable('mongo') || has('win32')
+if exists('g:mongoPluginLoaded') || !executable('mongosh') || has('win32')
   finish
 endif
 let g:mongoPluginLoaded = 1
